@@ -1,0 +1,22 @@
+PODS:
+  - bluetooth_peripheral (0.0.1):
+    - Flutter
+  - Flutter (1.0.0)
+
+DEPENDENCIES:
+  - bluetooth_peripheral (from `.symlinks/plugins/bluetooth_peripheral/ios`)
+  - Flutter (from `Flutter`)
+
+EXTERNAL SOURCES:
+  bluetooth_peripheral:
+    :path: ".symlinks/plugins/bluetooth_peripheral/ios"
+  Flutter:
+    :path: Flutter
+
+SPEC CHECKSUMS:
+  bluetooth_peripheral: d86978682263f19c3e32a0564129b630128a9305
+  Flutter: 0e3d915762c693b495b44d77113d4970485de6ec
+
+PODFILE CHECKSUM: aafe91acc616949ddb318b77800a7f51bffa2a4c
+
+COCOAPODS: 1.9.3
