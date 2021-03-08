@@ -70,7 +70,7 @@ class _MyAppState extends State<MyApp> {
             children: [
               Text('Running on: $_platformVersion\n'),
               Text('Is advertising: ' + _isBroadcasting.toString()),
-              FlatButton(
+              TextButton(
                   onPressed: () => _toggleAdvertise(),
                   child: Text(
                     'Toggle advertising',

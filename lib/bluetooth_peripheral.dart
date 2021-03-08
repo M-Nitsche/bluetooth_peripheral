@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter/services.dart';
 
 class BluetoothPeripheral {
-  static BluetoothPeripheral _instance;
+  static BluetoothPeripheral? _instance;
   final MethodChannel _methodChannel;
   final EventChannel _eventChannel;
 
@@ -16,19 +16,19 @@ class BluetoothPeripheral {
           const EventChannel('dev.nitsche.bluetooth_peripheral/events');
       _instance = BluetoothPeripheral.private(methodChannel, eventChannel);
     }
-    return _instance;
+    return _instance!;
   }
 
   BluetoothPeripheral.private(this._methodChannel, this._eventChannel);
 
-  Future<String> get platformVersion async {
-    final String version = await _methodChannel.invokeMethod('getPlatformVersion');
+  Future<String?> get platformVersion async {
+    final String? version = await _methodChannel.invokeMethod('getPlatformVersion');
     return version;
   }
 
   Future<void> startService(String userId, String username, String displayName) async {
-    assert(userId != null && userId.isNotEmpty);
-    if (!await isAdvertising) {
+    assert(userId.isNotEmpty);
+    if (!await (isAdvertising as FutureOr<bool>)) {
       Map params = <String, String>{
         "userId": userId,
         "username": username,
@@ -39,12 +39,12 @@ class BluetoothPeripheral {
   }
 
   Future<void> stopService() async {
-    if (await isAdvertising) {
+    if (await (isAdvertising as FutureOr<bool>)) {
       await _methodChannel.invokeMethod('stopService');
     }
   }
 
-  Future<bool> get isAdvertising async {
+  Future<bool?> get isAdvertising async {
     return await _methodChannel.invokeMethod('isAdvertising');
   }
 
