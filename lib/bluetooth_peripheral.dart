@@ -39,7 +39,7 @@ class BluetoothPeripheral {
   }
 
   Future<void> stopService() async {
-    if (await (isAdvertising as FutureOr<bool>)) {
+    if (await (isAdvertising) ?? false) {
       await _methodChannel.invokeMethod('stopService');
     }
   }
