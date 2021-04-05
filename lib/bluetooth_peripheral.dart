@@ -1,25 +1,21 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:flutter/services.dart';
 
+///Singletone instance
 class BluetoothPeripheral {
-  static BluetoothPeripheral? _instance;
-  final MethodChannel _methodChannel;
-  final EventChannel _eventChannel;
+  final MethodChannel _methodChannel =
+      const MethodChannel('dev.nitsche.bluetooth_peripheral/methods');
+  final EventChannel _eventChannel = const EventChannel('dev.nitsche.bluetooth_peripheral/events');
 
-  factory BluetoothPeripheral() {
-    if (_instance == null) {
-      final MethodChannel methodChannel =
-          const MethodChannel('dev.nitsche.bluetooth_peripheral/methods');
-
-      final EventChannel eventChannel =
-          const EventChannel('dev.nitsche.bluetooth_peripheral/events');
-      _instance = BluetoothPeripheral.private(methodChannel, eventChannel);
-    }
-    return _instance!;
+  /// Singleton boilerplate
+  BluetoothPeripheral._() {
+    log("Bluetooth peripheral singleton created!", name: this.runtimeType.toString());
   }
 
-  BluetoothPeripheral.private(this._methodChannel, this._eventChannel);
+  static BluetoothPeripheral _instance = BluetoothPeripheral._();
+  static BluetoothPeripheral get instance => _instance;
 
   Future<String?> get platformVersion async {
     final String? version = await _methodChannel.invokeMethod('getPlatformVersion');
