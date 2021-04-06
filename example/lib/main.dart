@@ -14,7 +14,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  BluetoothPeripheral _bluetoothPeripheral = BluetoothPeripheral();
+  BluetoothPeripheral _bluetoothPeripheral = BluetoothPeripheral.instance;
   String _platformVersion = 'Unknown';
   bool _isBroadcasting = false;
 

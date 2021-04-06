@@ -5,16 +5,17 @@ import 'package:flutter/services.dart';
 
 ///Singletone instance
 class BluetoothPeripheral {
-  final MethodChannel _methodChannel =
-      const MethodChannel('dev.nitsche.bluetooth_peripheral/methods');
-  final EventChannel _eventChannel = const EventChannel('dev.nitsche.bluetooth_peripheral/events');
+  final MethodChannel _methodChannel;
+  final EventChannel _eventChannel;
 
   /// Singleton boilerplate
-  BluetoothPeripheral._() {
+  BluetoothPeripheral._(this._methodChannel, this._eventChannel) {
     log("Bluetooth peripheral singleton created!", name: this.runtimeType.toString());
   }
 
-  static BluetoothPeripheral _instance = BluetoothPeripheral._();
+  static BluetoothPeripheral _instance = BluetoothPeripheral._(
+      MethodChannel('dev.nitsche.bluetooth_peripheral/methods'),
+      EventChannel('dev.nitsche.bluetooth_peripheral/events'));
   static BluetoothPeripheral get instance => _instance;
 
   Future<String?> get platformVersion async {
