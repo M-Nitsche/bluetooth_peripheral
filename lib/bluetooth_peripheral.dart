@@ -25,7 +25,7 @@ class BluetoothPeripheral {
 
   Future<void> startService(String userId, String username, String displayName) async {
     assert(userId.isNotEmpty);
-    if (!await (isAdvertising as FutureOr<bool>)) {
+    if (!(await isAdvertising ?? false)) {
       Map params = <String, String>{
         "userId": userId,
         "username": username,
